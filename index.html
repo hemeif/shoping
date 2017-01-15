@@ -21,6 +21,7 @@
 
 
     <title>Document</title>
+    <link rel="stylesheet" href="less/index.less">
 
 </head>
 <script src="js/jquery-1.10.1.min.js"></script>
@@ -203,6 +204,7 @@
             <span>掌上抢</span>
             <div class="daiji">
                距结束
+
                 <i>10</i>
                 :
                 <i>10</i>
@@ -1551,6 +1553,48 @@
             direction : 'vertical'
 
         });
+
+
+        var spans=$("i",$(".daiji"));
+        time();
+        var t=setInterval(time,1000);
+
+        function time(){
+            var arr=[];
+
+
+            var date=new Date();
+            var time1=date.getTime();
+            var nian=new Date(2017,0,15,23,30,00);
+
+            var time2=nian.getTime();
+
+            var time=(time2-time1)/1000;
+            var yue=Math.floor(time/60/60/24/30);
+
+            var tian=Math.floor((time/60/60/24)-(yue*30));
+
+            var shi=Math.floor((time/60/60)-(yue*30*24+tian*24));
+            arr.push(shi);
+            var fen=Math.floor((time/60)-(yue*30*24*60+tian*24*60+shi*60));
+
+            if(fen<10){
+                fen="0"+fen;
+            }
+            arr.push(fen);
+            var miao=Math.floor((time)-(yue*30*24*60*60+tian*24*60*60+shi*60*60+fen*60));
+            if(miao<10){
+                miao="0"+miao;
+            }
+            arr.push(miao);
+            for(var i=0;i<arr.length;i++){
+                spans[i].innerHTML=arr[i];
+                console.log(arr)
+
+            }
+
+        }
+
 
         var swiper3 = new Swiper('.swiper-container3');
 
